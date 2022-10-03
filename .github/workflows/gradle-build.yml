@@ -21,6 +21,8 @@ on:
 
 jobs:
   build:
+  
+    # test
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.return-tag.outputs.tag }}
