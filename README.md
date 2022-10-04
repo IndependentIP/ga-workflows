@@ -1,8 +1,8 @@
+:rotating_light: <b>Please remember that this repo is public.</b> :rotating_light:
+
 # ga-workflows
 
 Reusable CI/CD workflows.
-
-:rotating_light: <b>Please remember that this repo is public.</b> :rotating_light:
 
 ## How to use
 
