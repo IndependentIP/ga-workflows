@@ -28,7 +28,6 @@ jobs:
       - uses: ./actions/gcloud
         with:
           google-application-credentials: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-          environment: ${{ inputs.environment }}
 
       - uses: ./actions/setup-helm
 
