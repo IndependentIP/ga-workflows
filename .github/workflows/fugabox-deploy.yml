@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  workflow_call:
+    inputs:
+      fugabox_box:
+        required: true
+        type: string
+      service_fugabox_docker_image_var:
+        required: true
+        type: string
+      tag:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Checkout shared setup
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GIT_PAT }}
+          repository: IndependentIP/actions
+          path: actions
+
+      - uses: ./actions/fugabox-setup
+        with:
+          gh_deployer_ssh_config: ${{ secrets.GH_DEPLOYER_SSH_CONFIG }}
+          gh_deployer_key: ${{ secrets.GH_DEPLOYER_KEY }}
+
+      - uses: ./actions/fugabox-deploy
+        with:
+          version: ${{ inputs.tag }}
+          git_pat: ${{ secrets.GIT_PAT }}
+          service_fugabox_docker_image_var: ${{ inputs.service_fugabox_docker_image_var }}
+          fugabox_box: ${{ inputs.fugabox_box }}
