@@ -56,4 +56,4 @@ jobs:
           google_credentials: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - id: return-tag
-        run: echo "::set-output name=tag::${{ env.TAG }}"
+        run: echo "tag=${{ env.TAG }}" >> $GITHUB_OUTPUT
