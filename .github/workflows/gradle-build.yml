@@ -14,6 +14,14 @@ on:
         required: false
         default: false
         type: boolean
+      docker_build:
+        required: false
+        default: true
+        type: boolean
+      with_timestamp:
+        required: false
+        default: true
+        type: boolean
     outputs:
       tag:
         description: The generated docker tag
@@ -48,8 +56,10 @@ jobs:
       - uses: ./actions/get-tag
         with:
           branch: ${{ inputs.branch }}
+          with_timestamp: ${{ inputs.with_timestamp }}
 
-      - uses: ./actions/docker-build
+      - if: ${{ inputs.docker_build }}
+        uses: ./actions/docker-build
         with:
           push: ${{ inputs.docker_push }}
           version: ${{ env.TAG }}
