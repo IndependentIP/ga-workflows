@@ -1,0 +1,54 @@
+name: Build and Publish
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        required: true
+        type: string
+      sonar_scan:
+        required: false
+        default: false
+        type: boolean
+      with_timestamp:
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.return-tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.branch }}
+
+      - name: Checkout shared setup
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GIT_PAT }}
+          repository: IndependentIP/actions
+          path: actions
+
+      - uses: ./actions/gradle-build
+
+      - if: ${{ inputs.sonar_scan }}
+        uses: ./actions/sonarcloud-scan-gradle
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          sonarcloud_token: ${{ secrets.SONAR_TOKEN }}
+
+      - uses: ./actions/get-tag
+        with:
+          branch: ${{ inputs.branch }}
+          with_timestamp: ${{ inputs.with_timestamp }}
+
+      - uses: ./actions/gradle-publish
+        with:
+          version: ${{ env.TAG }}
+          nexus_url: ${{ secrets.NEXUS_URL }}
+          nexus_user: ${{ secrets.NEXUS_USER }}
+          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
