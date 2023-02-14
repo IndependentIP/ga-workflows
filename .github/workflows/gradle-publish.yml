@@ -49,6 +49,5 @@ jobs:
       - uses: ./actions/gradle-publish
         with:
           version: ${{ env.TAG }}
-          nexus_url: ${{ secrets.NEXUS_URL }}
           nexus_user: ${{ secrets.NEXUS_USER }}
-          nexus_password: ${{ secrets.NEXUS_PASSWORD }}
+          nexus_password: ${{ secrets.NEXUS_PASS }}
