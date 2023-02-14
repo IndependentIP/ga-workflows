@@ -14,10 +14,6 @@ on:
         required: false
         default: true
         type: boolean
-      gradle_publish:
-        required: false
-        default: false
-        type: boolean
 
 jobs:
   build:
@@ -50,8 +46,7 @@ jobs:
           branch: ${{ inputs.branch }}
           with_timestamp: ${{ inputs.with_timestamp }}
 
-      - if: ${{ inputs.gradle_publish }}
-        uses: ./actions/gradle-publish
+      - uses: ./actions/gradle-publish
         with:
           version: ${{ env.TAG }}
           nexus_url: ${{ secrets.NEXUS_URL }}
