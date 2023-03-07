@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Checkout shared setup
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GIT_PAT }}
+          repository: IndependentIP/actions
+          path: actions
+
+      - uses: ./actions/gcloud
+        with:
+          google-application-credentials: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+
+      - uses: ./actions/setup-helm
+
+      - uses: ./actions/setup-helm-secrets
+        with:
+          age_secret: ${{ secrets.FUGA_AGE_SECRET }}
+
+      - uses: ./actions/fugernetes-k8s-deploy
+        with:
+          environment: ${{ inputs.environment }}
+          version: ${{ inputs.tag }}
+          git_pat: ${{ secrets.GIT_PAT }}
+
