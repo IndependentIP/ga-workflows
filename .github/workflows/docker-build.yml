@@ -10,6 +10,10 @@ on:
         required: false
         default: false
         type: boolean
+      docker_file_location:
+        required: false
+        default: .
+        type: string
     outputs:
       tag:
         description: The generated docker tag
@@ -42,6 +46,7 @@ jobs:
           push: ${{ inputs.docker_push }}
           version: ${{ env.TAG }}
           google_credentials: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          docker_file_location: ${{ inputs.docker_file_location }}
 
       - id: return-tag
         run: echo "tag=${{ env.TAG }}" >> $GITHUB_OUTPUT
