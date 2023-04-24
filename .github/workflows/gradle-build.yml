@@ -22,6 +22,18 @@ on:
         required: false
         default: true
         type: boolean
+      docker_file_location:
+        required: false
+        default: .
+        type: string
+      jdk_version:
+        required: false
+        default: '11'
+        type: string
+      jdk_distribution:
+        required: false
+        default: 'temurin'
+        type: string
     outputs:
       tag:
         description: The generated docker tag
@@ -46,6 +58,9 @@ jobs:
           path: actions
 
       - uses: ./actions/gradle-build
+        with:
+          jdk_version: ${{ inputs.jdk_version }}
+          jdk_distribution: ${{ inputs.jdk_distribution }}
 
       - if: ${{ inputs.sonar_scan }}
         uses: ./actions/sonarcloud-scan-gradle
@@ -64,6 +79,7 @@ jobs:
           push: ${{ inputs.docker_push }}
           version: ${{ env.TAG }}
           google_credentials: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          docker_file_location: ${{ inputs.docker_file_location }}
 
       - id: return-tag
         run: echo "tag=${{ env.TAG }}" >> $GITHUB_OUTPUT
