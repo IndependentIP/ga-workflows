@@ -9,6 +9,9 @@ on:
       environment:
         required: true
         type: string
+      namespace:
+        required: false
+        type: string
 
 jobs:
   deploy:
@@ -40,3 +43,4 @@ jobs:
           environment: ${{ inputs.environment }}
           version: ${{ inputs.tag }}
           git_pat: ${{ secrets.GIT_PAT }}
+          namespace: ${{ inputs.namespace }}
