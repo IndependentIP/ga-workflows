@@ -12,6 +12,9 @@ on:
       namespace:
         required: false
         type: string
+      timeout:
+        required: false
+        type: string
 
 jobs:
   deploy:
@@ -44,3 +47,4 @@ jobs:
           version: ${{ inputs.tag }}
           git_pat: ${{ secrets.GIT_PAT }}
           namespace: ${{ inputs.namespace }}
+          timeout: ${{ inputs.timeout }}
