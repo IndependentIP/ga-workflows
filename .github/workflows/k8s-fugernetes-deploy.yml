@@ -15,7 +15,7 @@ on:
       timeout:
         required: false
         type: string
-        default: 600
+        default: '600'
 
 jobs:
   deploy:
