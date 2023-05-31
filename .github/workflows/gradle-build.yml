@@ -57,6 +57,8 @@ jobs:
           repository: IndependentIP/actions
           path: actions
 
+      - uses: ./actions/validate-pr
+
       - uses: ./actions/gradle-build
         with:
           jdk_version: ${{ inputs.jdk_version }}

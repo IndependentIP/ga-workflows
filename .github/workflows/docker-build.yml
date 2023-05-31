@@ -37,6 +37,8 @@ jobs:
           repository: IndependentIP/actions
           path: actions
 
+      - uses: ./actions/validate-pr
+
       - uses: ./actions/get-tag
         with:
           branch: ${{ inputs.branch }}
