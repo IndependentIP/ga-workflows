@@ -37,7 +37,8 @@ jobs:
           repository: IndependentIP/actions
           path: actions
 
-      - uses: ./actions/validate-pr
+      - if: ${{ github.event_name == 'pull_request' }}
+        uses: ./actions/validate-pr
 
       - uses: ./actions/get-tag
         with:
