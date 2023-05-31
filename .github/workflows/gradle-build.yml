@@ -57,7 +57,7 @@ jobs:
           repository: IndependentIP/actions
           path: actions
 
-      - if: ${{ github.event_name == 'pull_request' }}
+      - if: github.event_name == 'pull_request'
         uses: ./actions/validate-pr
 
       - uses: ./actions/gradle-build
