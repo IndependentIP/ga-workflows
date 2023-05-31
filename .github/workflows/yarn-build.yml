@@ -1,0 +1,58 @@
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        required: true
+        type: string
+      docker_push:
+        required: false
+        default: false
+        type: boolean
+      docker_file_location:
+        required: false
+        default: .
+        type: string
+    outputs:
+      tag:
+        description: The generated docker tag
+        value: ${{ jobs.build.outputs.tag }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.return-tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.branch }}
+
+      - name: Checkout shared setup
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GIT_PAT }}
+          repository: IndependentIP/actions
+          path: actions
+
+      - uses: ./actions/validate-pr
+
+      - uses: ./actions/yarn-test
+        with:
+          lint: true
+
+      - uses: ./actions/get-tag
+        with:
+          branch: ${{ inputs.branch }}
+
+      - uses: ./actions/docker-build
+        with:
+          push: ${{ inputs.docker_push }}
+          version: ${{ env.TAG }}
+          google_credentials: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          docker_file_location: ${{ inputs.docker_file_location }}
+
+      - id: return-tag
+        run: echo "tag=${{ env.TAG }}" >> $GITHUB_OUTPUT
