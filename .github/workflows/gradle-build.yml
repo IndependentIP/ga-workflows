@@ -57,9 +57,6 @@ jobs:
           repository: IndependentIP/actions
           path: actions
 
-      - if: github.event_name == 'pull_request'
-        uses: ./actions/validate-pr
-
       - uses: ./actions/gradle-build
         with:
           jdk_version: ${{ inputs.jdk_version }}
