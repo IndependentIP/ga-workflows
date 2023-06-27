@@ -12,6 +12,9 @@ on:
       tag:
         required: true
         type: string
+      service_name:
+        required: false
+        type: string
 
 jobs:
   deploy:
@@ -46,3 +49,4 @@ jobs:
           git_pat: ${{ secrets.GIT_PAT }}
           service_fugabox_docker_image_var: ${{ inputs.service_fugabox_docker_image_var }}
           fugabox_box: ${{ inputs.fugabox_box }}
+          service_name: ${{ inputs.service_name }}
