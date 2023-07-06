@@ -16,6 +16,10 @@ on:
         required: false
         type: string
         default: '600'
+      fugernetes_branch:
+        required: false
+        type: string
+        default: 'master'
 
 jobs:
   deploy:
@@ -49,3 +53,4 @@ jobs:
           git_pat: ${{ secrets.GIT_PAT }}
           namespace: ${{ inputs.namespace }}
           timeout: ${{ inputs.timeout }}
+          fugernetes_branch: ${{ inputs.fugernetes_branch }}
