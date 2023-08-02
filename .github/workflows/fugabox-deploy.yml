@@ -15,6 +15,10 @@ on:
       service_name:
         required: false
         type: string
+      update_version_fugabox:
+        required: false
+        type: string
+        default: 'true'
 
 jobs:
   deploy:
@@ -50,3 +54,4 @@ jobs:
           service_fugabox_docker_image_var: ${{ inputs.service_fugabox_docker_image_var }}
           fugabox_box: ${{ inputs.fugabox_box }}
           service_name: ${{ inputs.service_name }}
+          update_version_fugabox: ${{ inputs.update_version_fugabox }}
