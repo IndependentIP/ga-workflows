@@ -19,6 +19,10 @@ on:
         required: false
         type: string
         default: 'true'
+      rolling_deploy:
+        required: false
+        type: boolean
+        default: 'false'
 
 jobs:
   deploy:
@@ -55,3 +59,4 @@ jobs:
           fugabox_box: ${{ inputs.fugabox_box }}
           service_name: ${{ inputs.service_name }}
           update_version_fugabox: ${{ inputs.update_version_fugabox }}
+          rolling_deploy: ${{ inputs.rolling_deploy }}
