@@ -34,6 +34,10 @@ on:
         required: false
         default: 'temurin'
         type: string
+      run_tests:
+        required: false
+        default: true
+        type: boolean
     outputs:
       tag:
         description: The generated docker tag
@@ -64,6 +68,7 @@ jobs:
         with:
           jdk_version: ${{ inputs.jdk_version }}
           jdk_distribution: ${{ inputs.jdk_distribution }}
+          run_tests: ${{ inputs.run_tests }}
 
       - if: ${{ inputs.sonar_scan }}
         uses: ./actions/sonarcloud-scan-gradle
