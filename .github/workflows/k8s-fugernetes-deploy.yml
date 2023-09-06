@@ -54,3 +54,4 @@ jobs:
           namespace: ${{ inputs.namespace }}
           timeout: ${{ inputs.timeout }}
           fugernetes_branch: ${{ inputs.fugernetes_branch }}
+          slack_webhook: ${{ secrets.FUGERNETES_DEPLOYMENTS_WEBHOOK }}
