@@ -14,6 +14,14 @@ on:
         required: false
         default: true
         type: boolean
+      jdk_version:
+        required: false
+        default: '11'
+        type: string
+      jdk_distribution:
+        required: false
+        default: 'temurin'
+        type: string
 
 jobs:
   build:
@@ -34,6 +42,9 @@ jobs:
           path: actions
 
       - uses: ./actions/gradle-build
+        with:
+          jdk_version: ${{ inputs.jdk_version }}
+          jdk_distribution: ${{ inputs.jdk_distribution }}
 
       - if: ${{ inputs.sonar_scan }}
         uses: ./actions/sonarcloud-scan-gradle
