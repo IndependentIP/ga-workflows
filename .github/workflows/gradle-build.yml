@@ -28,7 +28,7 @@ on:
         type: string
       jdk_version:
         required: false
-        default: '11'
+        default: '17'
         type: string
       jdk_distribution:
         required: false
