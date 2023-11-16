@@ -12,6 +12,10 @@ on:
       namespace:
         required: false
         type: string
+      region:
+        required: false
+        type: string
+        default: 'europe-west4'
       timeout:
         required: false
         type: string
@@ -52,6 +56,7 @@ jobs:
           version: ${{ inputs.tag }}
           git_pat: ${{ secrets.GIT_PAT }}
           namespace: ${{ inputs.namespace }}
+          region:  ${{ inputs.region }}
           timeout: ${{ inputs.timeout }}
           fugernetes_branch: ${{ inputs.fugernetes_branch }}
           slack_webhook: ${{ secrets.FUGERNETES_DEPLOYMENTS_WEBHOOK }}
