@@ -41,3 +41,4 @@ jobs:
           environment: ${{ inputs.environment }}
           version: ${{ inputs.tag }}
           git_pat: ${{ secrets.GIT_PAT }}
+          slack_webhook: ${{ secrets.FUGERNETES_DEPLOYMENTS_WEBHOOK }}
