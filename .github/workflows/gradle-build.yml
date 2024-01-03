@@ -86,7 +86,7 @@ jobs:
         with:
           push: ${{ inputs.docker_push }}
           version: ${{ env.TAG }}
-          google_credentials: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          workload_identity_provider: ${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
           docker_file_location: ${{ inputs.docker_file_location }}
 
       - id: return-tag
