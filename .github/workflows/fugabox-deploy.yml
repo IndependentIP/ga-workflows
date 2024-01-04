@@ -37,15 +37,16 @@ jobs:
         with:
           token: ${{ secrets.GIT_PAT }}
           repository: IndependentIP/actions
+          ref: ruby33
           path: actions
-          
+
       - uses: ./actions/vpn
         with:
           key: ${{ secrets.VPN_KEY }}
           cert: ${{ secrets.VPN_CERT }}
           ca-cert: ${{ secrets.VPN_CA_CERT }}
           config: ${{ secrets.VPN_CONFIG }}
-          
+
       - uses: ./actions/fugabox-setup
         with:
           gh_deployer_ssh_config: ${{ secrets.GH_DEPLOYER_SSH_CONFIG }}
