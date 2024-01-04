@@ -28,7 +28,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -43,7 +45,7 @@ jobs:
 
       - uses: ./actions/gcloud
         with:
-          google-application-credentials: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          workload_identity_provider: ${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
 
       - uses: ./actions/setup-helm
 
