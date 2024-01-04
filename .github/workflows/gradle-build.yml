@@ -55,7 +55,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: 'F8S-WI'
+          ref: ${{ inputs.branch }}
 
       - name: Checkout shared setup
         uses: actions/checkout@v3
@@ -63,6 +63,7 @@ jobs:
           token: ${{ secrets.GIT_PAT }}
           repository: IndependentIP/actions
           path: actions
+          ref: 'F8S-WI'
 
       - if: ${{ github.event_name == 'pull_request' }}
         uses: ./actions/validate-pr
