@@ -43,7 +43,7 @@ jobs:
 
       - uses: ./actions/gcloud
         with:
-          google_credentials: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          google-application-credentials: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - uses: ./actions/setup-helm
 
