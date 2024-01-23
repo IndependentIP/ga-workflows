@@ -61,3 +61,4 @@ jobs:
           timeout: ${{ inputs.timeout }}
           fugernetes_branch: ${{ inputs.fugernetes_branch }}
           slack_webhook: ${{ secrets.FUGERNETES_DEPLOYMENTS_WEBHOOK }}
+          helm_debug: "true"
