@@ -24,6 +24,10 @@ on:
         required: false
         type: string
         default: 'master'
+      helm_debug:
+        description: Run Helm in debug mode
+        required: false
+        default: "false"
 
 jobs:
   deploy:
@@ -61,3 +65,4 @@ jobs:
           timeout: ${{ inputs.timeout }}
           fugernetes_branch: ${{ inputs.fugernetes_branch }}
           slack_webhook: ${{ secrets.FUGERNETES_DEPLOYMENTS_WEBHOOK }}
+          helm_debug: ${{ inputs.helm_debug }}
