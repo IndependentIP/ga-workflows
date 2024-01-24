@@ -27,7 +27,7 @@ on:
       helm_debug:
         description: Run Helm in debug mode
         required: false
-        type: boolean
+        type: string
         default: "false"
 
 jobs:
