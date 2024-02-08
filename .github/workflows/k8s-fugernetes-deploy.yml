@@ -53,8 +53,6 @@ jobs:
       - uses: ./actions/setup-helm
 
       - uses: ./actions/setup-helm-secrets
-        with:
-          age_secret: ${{ secrets.FUGA_AGE_SECRET }}
 
       - uses: ./actions/fugernetes-k8s-deploy
         with:
