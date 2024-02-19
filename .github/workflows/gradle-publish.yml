@@ -16,7 +16,7 @@ on:
         type: boolean
       jdk_version:
         required: false
-        default: '11'
+        default: '17'
         type: string
       jdk_distribution:
         required: false
@@ -62,3 +62,5 @@ jobs:
           version: ${{ env.TAG }}
           nexus_user: ${{ secrets.NEXUS_USER }}
           nexus_password: ${{ secrets.NEXUS_PASS }}
+          jdk_version: ${{ inputs.jdk_version }}
+          jdk_distribution: ${{ inputs.jdk_distribution }}
